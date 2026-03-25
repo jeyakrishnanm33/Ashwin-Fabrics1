@@ -1,0 +1,35 @@
+# Node
+node_modules/
+dist/
+build/
+
+# Env files
+.env
+.env.local
+backend/.env
+frontend/.env
+ml-service/.env
+
+# Firebase / Secrets
+firebase-service-account.json
+ml-service/firebase-credentials.json
+backend/firebase-key.json.json
+# ML Model files
+ml-service/model/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
