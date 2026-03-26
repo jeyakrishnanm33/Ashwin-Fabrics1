@@ -1,9 +1,11 @@
 // server.js
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-require('dotenv').config();
+const { db } = require('./src/services/firebase');
+
 
 const app = express();
 
@@ -25,7 +27,15 @@ app.use('/api/users',           require('./src/routes/users'));
 app.use('/api/recommendations', require('./src/routes/recommendations'));
 app.use('/api/payments',        require('./src/routes/payments'));
 app.use('/api/reviews',         require('./src/routes/reviews'));
-
+app.get("/firebase-test", async (req, res) => {
+  try {
+    const snap = await db.collection("test").get();
+    res.json({ ok: true, count: snap.size });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err.message });
+  }
+});
 // Health check
 app.get('/health', (_, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
 
